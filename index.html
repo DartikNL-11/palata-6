@@ -19,9 +19,23 @@
 --font-mono:'Courier Prime',monospace;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font-text);background:var(--paper);color:var(--ink);overflow-x:hidden;perspective:2000px}
+body{font-family:var(--font-text);background:var(--paper);color:var(--ink);overflow-x:hidden;cursor:none}
 @media(hover:none){body{cursor:auto}}
 img{display:block;max-width:100%}
+
+/* КУРСОР - БОКАЛ ПИВА (САМЫЙ НАДЕЖНЫЙ) */
+.beer-cursor{
+position:fixed;top:0;left:0;
+width:40px;height:56px;
+z-index:999999;pointer-events:none;
+transform:translate(-50%,-50%);
+transition:width .2s,height .2s,opacity .2s;
+will-change:transform, width, height;
+filter:drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+}
+.beer-cursor svg{width:100%;height:100%;display:block}
+.beer-cursor.big{width:52px;height:72px;filter:drop-shadow(0 8px 14px rgba(0,0,0,0.6))}
+.beer-cursor.hide{opacity:0}
 
 /* ФОНОВАЯ ТЕКСТУРА */
 .paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E")}
@@ -46,16 +60,16 @@ img{display:block;max-width:100%}
 .hero-left .cta{display:inline-flex;align-items:center;gap:14px;padding:20px 42px;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);transition:all .3s}
 .hero-left .cta:hover{background:var(--red);border-color:var(--red);transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 
-/* 3D-ПОСТЕР */
-.hero-right{position:relative;display:flex;align-items:center;justify-content:center;perspective:1200px}
-.poster-wrap{width:100%;max-width:440px;transform-style:preserve-3d;transition:transform .1s ease-out;transform:rotateY(-15deg) rotateX(8deg)}
-.poster{position:relative;background:var(--paper-dark);border:2px solid var(--line);padding:48px 40px;box-shadow:20px 20px 0 var(--line);transform-style:preserve-3d}
-.poster::before{content:'МЕДИЦИНСКАЯ КАРТА №6';position:absolute;top:-14px;left:24px;background:var(--red);color:var(--paper);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.25em;padding:6px 16px;transform:translateZ(30px)}
-.poster h3{font-family:var(--font-title);font-size:1.6rem;text-transform:uppercase;margin-bottom:24px;border-bottom:2px solid var(--line);padding-bottom:14px;transform:translateZ(40px)}
-.poster .info-row{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.85rem;padding:12px 0;border-bottom:1px dashed var(--line);transform:translateZ(30px)}
+/* 3D-ПОСТЕР (Упрощен, чтобы не ломал курсор) */
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+.poster-wrap{width:100%;max-width:440px;transition:transform .1s ease-out;transform:rotateY(-10deg) rotateX(5deg)}
+.poster{position:relative;background:var(--paper-dark);border:2px solid var(--line);padding:48px 40px;box-shadow:16px 16px 0 var(--line)}
+.poster::before{content:'МЕДИЦИНСКАЯ КАРТА №6';position:absolute;top:-14px;left:24px;background:var(--red);color:var(--paper);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.25em;padding:6px 16px}
+.poster h3{font-family:var(--font-title);font-size:1.6rem;text-transform:uppercase;margin-bottom:24px;border-bottom:2px solid var(--line);padding-bottom:14px}
+.poster .info-row{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.85rem;padding:12px 0;border-bottom:1px dashed var(--line)}
 .poster .info-row:last-child{border:none}
 .poster .info-row .val{color:var(--red);font-weight:700}
-.poster-stamp{position:absolute;bottom:-40px;right:-30px;width:140px;height:140px;border:4px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-title);font-size:.8rem;color:var(--red);text-align:center;font-weight:700;text-transform:uppercase;transform:rotate(-15deg) translateZ(80px);background:rgba(244,240,230,.95);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.poster-stamp{position:absolute;bottom:-40px;right:-30px;width:140px;height:140px;border:4px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-title);font-size:.8rem;color:var(--red);text-align:center;font-weight:700;text-transform:uppercase;transform:rotate(-15deg);background:rgba(244,240,230,.95);box-shadow:0 10px 30px rgba(0,0,0,.2)}
 
 /* СЕКЦИИ */
 .sec{padding:140px 48px;border-top:2px solid var(--line);position:relative}
@@ -76,7 +90,7 @@ img{display:block;max-width:100%}
 .stat-box .num{font-family:var(--font-title);font-size:4rem;font-weight:700;color:var(--red);line-height:1}
 .stat-box .lbl{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--brown);margin-top:12px}
 
-/* ДВЕРЬ (сильно уменьшена) */
+/* ДВЕРЬ */
 .door-section{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);align-items:center}
 .door-img-wrap{padding:60px;background:var(--paper-dark);display:flex;justify-content:center}
 .door-img{position:relative;overflow:hidden;background:var(--ink);max-width:350px;width:100%;border:4px solid var(--paper);box-shadow:12px 12px 0 var(--line);transition:transform .3s}
@@ -87,7 +101,7 @@ img{display:block;max-width:100%}
 .door-text h3{font-family:var(--font-title);font-size:2.5rem;text-transform:uppercase;margin-bottom:24px}
 .door-text p{font-family:var(--font-mono);font-size:1rem;line-height:1.8;color:var(--brown)}
 
-/* ГАЛЕРЕЯ (УМЕНЬШЕНА) */
+/* ГАЛЕРЕЯ */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:72px}
 .gallery-item{position:relative;border:2px solid var(--line);background:var(--ink);overflow:hidden;aspect-ratio:1/1;transition:transform .3s;border-radius:4px}
 .gallery-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter .4s}
@@ -96,7 +110,7 @@ img{display:block;max-width:100%}
 .gallery-item::after{content:attr(data-cap);position:absolute;bottom:0;left:0;right:0;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 20px;transform:translateY(100%);transition:transform .3s}
 .gallery-item:hover::after{transform:translateY(0)}
 
-/* МЕНЮ (УМЕНЬШЕНО ФОТО) */
+/* МЕНЮ */
 .menu-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
 .menu-list{list-style:none}
 .menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:24px 0;border-bottom:1px dashed var(--brown);font-family:var(--font-mono);transition:padding-left .3s,border-color .3s}
@@ -145,6 +159,7 @@ img{display:block;max-width:100%}
 .footer p{font-family:var(--font-mono);font-size:.75rem;color:var(--brown);letter-spacing:.1em}
 
 @media(max-width:900px){
+body{cursor:auto}.beer-cursor{display:none}
 .top-bar{padding:0 20px;height:60px}
 .nav-menu{display:none}
 .hero{padding:100px 20px 60px}
@@ -168,6 +183,32 @@ img{display:block;max-width:100%}
 </style>
 </head>
 <body>
+
+<!-- КУРСОР -->
+<div class="beer-cursor" id="beerCursor">
+<svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 35 Q20 10 50 10 Q80 10 80 35 Q80 45 70 45 L30 45 Q20 45 20 35 Z" fill="#fdfbf7" stroke="#d1c9b8" stroke-width="2"/>
+  <path d="M25 40 Q30 20 50 20 Q70 20 75 40" fill="none" stroke="#e3dcd0" stroke-width="2"/>
+  <path d="M20 40 L25 115 Q25 125 35 125 L65 125 Q75 125 75 115 L80 40 Z" fill="rgba(255, 255, 255, 0.2)" stroke="#b8b0a0" stroke-width="3"/>
+  <path d="M24 60 L28 112 Q28 120 35 120 L65 120 Q72 120 72 112 L76 60 Z" fill="#e89b2d"/>
+  <path d="M24 60 L28 112 Q28 120 35 120 L65 120 Q72 120 72 112 L76 60 Z" fill="url(#bubbleGradient)" opacity="0.6"/>
+  <circle cx="35" cy="80" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="45" cy="70" r="1.5" fill="#fff" opacity="0.9"/>
+  <circle cx="60" cy="90" r="2.5" fill="#fff" opacity="0.7"/>
+  <circle cx="50" cy="100" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="65" cy="75" r="1.5" fill="#fff" opacity="0.9"/>
+  <circle cx="30" cy="105" r="1.5" fill="#fff" opacity="0.7"/>
+  <path d="M80 60 Q100 60 100 80 Q100 100 80 100" fill="none" stroke="#b8b0a0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M80 60 Q100 60 100 80 Q100 100 80 100" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M30 50 L32 100" stroke="#fff" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="bubbleGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+</svg>
+</div>
 
 <div class="paper-bg"></div>
 
@@ -224,7 +265,6 @@ img{display:block;max-width:100%}
 </div>
 </section>
 
-<!-- ДВЕРЬ (УМЕНЬШЕНА) -->
 <div class="door-section">
 <div class="door-img-wrap">
 <div class="door-img">
@@ -238,7 +278,6 @@ img{display:block;max-width:100%}
 </div>
 </div>
 
-<!-- ГАЛЕРЕЯ (3 КОЛОНКИ) -->
 <section class="sec" id="gallery">
 <div class="sec-inner">
 <div class="sec-label">Фото</div>
@@ -317,17 +356,49 @@ img{display:block;max-width:100%}
 </footer>
 
 <script>
-/* 3D-ПОСТЕР */
+/* КУРСОР-БОКАЛ ПИВА */
+(function(){
+const cursor = document.getElementById('beerCursor');
+if(!cursor) return;
+
+let mx = innerWidth/2, my = innerHeight/2;
+let cx = mx, cy = my;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+});
+
+function loop(){
+  cx += (mx - cx) * 0.5;
+  cy += (my - cy) * 0.5;
+  cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* Увеличение над ссылками */
+document.querySelectorAll('a,button,input,select,.gallery-item,.menu-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('big'));
+});
+
+/* Скрыть при уходе */
+document.addEventListener('mouseleave',()=>cursor.classList.add('hide'));
+document.addEventListener('mouseenter',()=>cursor.classList.remove('hide'));
+})();
+
+/* Упрощенный 3D для постера (без поломки курсора) */
 (function(){
 const wrap = document.getElementById('posterWrap');
 if(!wrap) return;
 document.addEventListener('mousemove', e => {
 const x = (e.clientX / window.innerWidth - 0.5) * 2;
 const y = (e.clientY / window.innerHeight - 0.5) * 2;
-wrap.style.transform = `rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`;
+wrap.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
 });
 document.addEventListener('mouseleave', () => {
-wrap.style.transform = 'rotateY(-15deg) rotateX(8deg)';
+wrap.style.transform = 'rotateY(-10deg) rotateX(5deg)';
 });
 })();
 
@@ -337,7 +408,7 @@ el.addEventListener('mousemove', e => {
 const r = el.getBoundingClientRect();
 const x = (e.clientX - r.left) / r.width - 0.5;
 const y = (e.clientY - r.top) / r.height - 0.5;
-el.style.transform = `perspective(1000px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) translateZ(20px)`;
+el.style.transform = `perspective(1000px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateZ(10px)`;
 });
 el.addEventListener('mouseleave', () => {
 el.style.transform = '';

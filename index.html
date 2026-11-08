@@ -23,7 +23,7 @@ body{font-family:var(--font-text);background:var(--paper);color:var(--ink);overf
 @media(hover:none){body{cursor:auto}}
 img{display:block;max-width:100%}
 
-/* КУРСОР - БОКАЛ ПИВА (САМЫЙ НАДЕЖНЫЙ) */
+/* КУРСОР - БОКАЛ ПИВА */
 .beer-cursor{
 position:fixed;top:0;left:0;
 width:40px;height:56px;
@@ -60,7 +60,7 @@ filter:drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 .hero-left .cta{display:inline-flex;align-items:center;gap:14px;padding:20px 42px;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);transition:all .3s}
 .hero-left .cta:hover{background:var(--red);border-color:var(--red);transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 
-/* 3D-ПОСТЕР (Упрощен, чтобы не ломал курсор) */
+/* 3D-ПОСТЕР */
 .hero-right{position:relative;display:flex;align-items:center;justify-content:center}
 .poster-wrap{width:100%;max-width:440px;transition:transform .1s ease-out;transform:rotateY(-10deg) rotateX(5deg)}
 .poster{position:relative;background:var(--paper-dark);border:2px solid var(--line);padding:48px 40px;box-shadow:16px 16px 0 var(--line)}
@@ -152,11 +152,24 @@ filter:drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 .map-block .btn-map{display:inline-block;margin-top:32px;padding:16px 32px;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:background .3s}
 .map-block .btn-map:hover{background:var(--red)}
 
-/* ФУТЕР */
-.footer{padding:72px 48px;background:var(--paper);border-top:2px solid var(--line);text-align:center}
+/* ФУТЕР (ДОБАВЛЕНЫ РЕКВИЗИТЫ И 18+) */
+.footer{padding:80px 48px 40px;background:var(--paper);border-top:2px solid var(--line)}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:60px}
 .footer-logo{font-family:var(--font-title);font-size:2.2rem;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:20px}
 .footer-logo .red{color:var(--red)}
-.footer p{font-family:var(--font-mono);font-size:.75rem;color:var(--brown);letter-spacing:.1em}
+.footer-desc{font-family:var(--font-mono);font-size:.85rem;color:var(--brown);line-height:1.8;max-width:300px}
+.footer-col h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{font-family:var(--font-mono);font-size:.85rem;color:var(--ink);text-decoration:none;transition:color .3s}
+.footer-col ul li a:hover{color:var(--red)}
+
+/* БЛОК РЕКВИЗИТОВ (ПУСТЫЕ ПОЛЯ ДЛЯ ЗАПОЛНЕНИЯ) */
+.legal-info{max-width:1400px;margin:0 auto;padding-top:32px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.75rem;color:var(--brown);line-height:1.8;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.legal-info strong{color:var(--ink)}
+.legal-info .placeholder{border-bottom:1px dashed var(--red);padding:0 8px;color:var(--red);font-style:italic;display:inline-block;min-width:120px}
+.legal-info .age-limit{display:inline-block;border:2px solid var(--red);color:var(--red);font-weight:700;padding:4px 8px;font-size:1rem;margin-top:8px;vertical-align:middle;margin-right:12px}
+.footer-bottom{max-width:1400px;margin:0 auto;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.75rem;color:var(--brown);flex-wrap:wrap;gap:16px}
 
 @media(max-width:900px){
 body{cursor:auto}.beer-cursor{display:none}
@@ -177,7 +190,9 @@ body{cursor:auto}.beer-cursor{display:none}
 .contacts-sec{padding:80px 20px}
 .contacts-grid{grid-template-columns:1fr;gap:48px}
 .map-block{padding:32px 24px}
-.footer{padding:48px 20px}
+.footer{padding:40px 20px}
+.footer-grid{grid-template-columns:1fr;gap:40px}
+.legal-info{grid-template-columns:1fr;gap:20px}
 .poster-wrap{transform:none}
 }
 </style>
@@ -351,8 +366,48 @@ body{cursor:auto}.beer-cursor{display:none}
 </section>
 
 <footer class="footer">
+<div class="footer-grid">
+<div>
 <div class="footer-logo">Палата <span class="red">№6</span></div>
-<p>Крафтовый бар · Таганрог · ул. Чехова, 65 · © 2026</p>
+<p class="footer-desc">Крафтовый бар в Таганроге. Пиво, атмосфера и немного странности.</p>
+</div>
+<div class="footer-col">
+<h4>Навигация</h4>
+<ul>
+<li><a href="#about">О нас</a></li>
+<li><a href="#menu">Меню</a></li>
+<li><a href="#contacts">Контакты</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Соцсети</h4>
+<ul>
+<li><a href="#">ВКонтакте</a></li>
+<li><a href="#">Telegram</a></li>
+</ul>
+</div>
+</div>
+
+<!-- БЛОК ДЛЯ РЕКВИЗИТОВ (ПУСТЫЕ ПОЛЯ) -->
+<div class="legal-info">
+<div>
+  <strong>Информация о продавце:</strong><br>
+  ИП / ООО: <span class="placeholder">[ВПИШИТЕ НАЗВАНИЕ]</span><br>
+  ИНН: <span class="placeholder">[ВПИШИТЕ ИНН]</span><br>
+  ОГРН / ОГРНИП: <span class="placeholder">[ВПИШИТЕ ОГРН]</span><br>
+  Юр. адрес: <span class="placeholder">[ВПИШИТЕ АДРЕС]</span>
+</div>
+<div>
+  <strong>Важная информация:</strong><br>
+  Сайт не является интернет-магазином и не осуществляет дистанционную продажу алкогольной продукции.<br>
+  <span class="age-limit">18+</span> Чрезмерное употребление алкоголя вредит вашему здоровью.
+</div>
+</div>
+
+<div class="footer-bottom">
+<span>© 2026 Палата №6</span>
+<span>Крафтовый бар · Таганрог</span>
+</div>
 </footer>
 
 <script>
@@ -377,18 +432,16 @@ function loop(){
 }
 loop();
 
-/* Увеличение над ссылками */
 document.querySelectorAll('a,button,input,select,.gallery-item,.menu-item').forEach(el=>{
   el.addEventListener('mouseenter',()=>cursor.classList.add('big'));
   el.addEventListener('mouseleave',()=>cursor.classList.remove('big'));
 });
 
-/* Скрыть при уходе */
 document.addEventListener('mouseleave',()=>cursor.classList.add('hide'));
 document.addEventListener('mouseenter',()=>cursor.classList.remove('hide'));
 })();
 
-/* Упрощенный 3D для постера (без поломки курсора) */
+/* 3D-ПОСТЕР */
 (function(){
 const wrap = document.getElementById('posterWrap');
 if(!wrap) return;
